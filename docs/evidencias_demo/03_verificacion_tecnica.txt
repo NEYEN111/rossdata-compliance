@@ -1,0 +1,15 @@
+PLANTILLA ACADEMICA - DATOS FICTICIOS
+Caso 7 - comprobación de la corrección de acceso al archivo de prueba
+
+Antes: el caso informa que una configuración incorrecta permitió acceso público.
+Corrección propuesta: restringir permisos, retirar datos reales del entorno de
+prueba, revisar accesos y verificar el comportamiento desde una sesión anónima.
+
+Registrar en el ensayo:
+- Recurso y ambiente ficticio revisado.
+- Fecha, responsable y método de comprobación.
+- Resultado observado y prueba que lo respalda.
+- Preservación de registros y alcance de la investigación.
+- Pendientes y revisión de que la causa no siga presente en otros recursos.
+
+Este documento no es una prueba técnica ejecutada sobre un proveedor real.

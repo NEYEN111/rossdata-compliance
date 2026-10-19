@@ -1,0 +1,22 @@
+# Demo academica gratuita. SQLite se reinicia al recrearse la instancia.
+services:
+  - type: web
+    name: crossdata-compliance-neyen
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python run.py
+    healthCheckPath: /healthz
+    envVars:
+      - key: HOST
+        value: "0.0.0.0"
+      - key: COOKIE_SECURE
+        value: "1"
+      - key: SHOW_DEMO_CREDENTIALS
+        value: "0"
+      - key: DEMO_EPHEMERAL
+        value: "1"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEMO_PASSWORD
+        sync: false

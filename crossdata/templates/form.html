@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block subtitle %}<p>Registra información ficticia y verificable para el ejercicio académico.</p>{% endblock %}
+{% block actions %}<a class="btn btn-outline-secondary" href="{{url_for('web.detail',module=module,record_id=record.id) if record else url_for('web.listing',module=module)}}">Volver</a>{% endblock %}
+{% block content %}
+<form method="post" class="panel record-form" id="record-form"><input type="hidden" name="csrf_token" value="{{csrf_token()}}"><div class="panel-heading"><h2>Información del registro</h2><span class="subtle-label">* Campos obligatorios</span></div><div class="form-grid">
+{% for field in spec.fields %}
+{% set key=field.key %}{% set value=request.form.get(key,'') if request.method=='POST' else getattr(record,key,'') if record else request.args.get(key,'') %}
+<div class="field {{'full-field' if field.kind in ['textarea','countries'] else ''}}">
+{% if field.kind=='bool' %}<div class="form-check form-switch"><input class="form-check-input" id="{{key}}" name="{{key}}" type="checkbox" {% if value %}checked{% endif %}><label class="form-check-label" for="{{key}}">{{field.label}}</label></div>
+{% elif field.kind=='countries' %}<fieldset><legend class="form-label">{{field.label}} *</legend><div class="country-checkboxes">{% for v,label in field_options(field) %}<label><input type="checkbox" name="{{key}}" value="{{v}}" {% if (request.method=='POST' and v in request.form.getlist(key)) or (request.method!='POST' and record and v|int in record.jurisdictions|map(attribute='id')|list) %}checked{% endif %}> {{label}}</label>{% endfor %}</div></fieldset>
+{% else %}<label class="form-label" for="{{key}}">{{field.label}}{{' *' if field.required else ''}}</label>
+{% if field.kind in ['select','jurisdiction','treatment','evidence'] %}<select class="form-select" name="{{key}}" id="{{key}}" {{'required' if field.required else ''}}><option value="">{{'Seleccionar…' if field.required else 'Sin registrar / sin vincular'}}</option>{% for v,label in field_options(field) %}<option value="{{v}}" {% if value|string==v|string %}selected{% endif %}>{{label}}</option>{% endfor %}</select>
+{% elif field.kind=='textarea' %}<textarea class="form-control" name="{{key}}" id="{{key}}" rows="3" maxlength="4000" {{'required' if field.required else ''}}>{{value or ''}}</textarea>
+{% else %}<input class="form-control" name="{{key}}" id="{{key}}" type="{{'number' if field.kind=='score' else field.kind}}" value="{{value if value is not none else ''}}" {{'required' if field.required else ''}} {% if field.kind=='score' %}min="1" max="5"{% elif field.kind=='number' %}min="0" max="100000000"{% else %}maxlength="500"{% endif %}>{% endif %}{% endif %}</div>{% endfor %}
+</div><div id="business-alerts" class="form-rule-alerts" aria-live="polite"></div><div class="form-bottom"><span>{{notice}}</span><button class="btn btn-primary">{{icon('check',18)}} Guardar registro</button></div></form>
+{% endblock %}

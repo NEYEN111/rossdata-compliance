@@ -1,0 +1,16 @@
+BORRADOR ACADEMICO - NO ENVIADO A NINGUNA AUTORIDAD NI PERSONA
+Caso 7 - AndeClass - exposición de un archivo de prueba
+Tratamiento: Bienestar estudiantil. País: especificar según la revisión.
+Datos descritos por la consigna: nombres, correos y salud de 320 usuarios.
+
+Campos para completar en el ejercicio:
+- Autoridad o grupo de titulares destinatarios.
+- Hechos, hora de conocimiento, periodo de exposición y alcance investigado.
+- Consecuencias probables y medidas adoptadas.
+- Punto de contacto ficticio del caso.
+- Fundamento de la obligación, plazo y cómputo revisado.
+- Constancia simulada y responsable de la actuación.
+
+Este archivo NO acredita un envío. En una operación real se requeriría constancia
+del canal utilizado. Validarlo en la demo representa únicamente un acto simulado,
+que debe describirse expresamente como tal en la nota del incidente.
